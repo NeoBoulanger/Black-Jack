@@ -74,6 +74,7 @@ public class Carte {
 			case Carte.TREFLE : return "Trèfle";
 			case Carte.CARREAU : return "Carreau";
 		}
+		return "";
 	}
 
 	/**
