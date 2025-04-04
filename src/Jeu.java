@@ -6,5 +6,15 @@ public class Jeu {
 
 	private Paquet paquet_croupier;
 
-	// Création des différents paquets
+	/**
+	 * Permet de creer un jeu avec des paquets
+	 * une pioche, une main joueur, une main croupier
+	 */
+	public Jeu() throws Exception{
+		this.pioche = new Paquet("../data/cartes.txt");
+		this.paquet_joueur = new Paquet();
+		this.paquet_croupier = new Paquet();
+	}
+
+
 }

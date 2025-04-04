@@ -3,6 +3,7 @@ public class Carte {
 	private boolean retournee;
 	private int valeur;
 	private int couleur;
+	private int puissance;
 
 	// Attributs pour les couleurs
 	private static final int COEUR=1;
