@@ -10,6 +10,11 @@ public class Carte {
 	private static final int TREFLE=3;
 	private static final int CARREAU=4;
 
+	// Définition des couleurs pour afficher dans le terminal
+	public static final String ROUGE = "\u001B[31m";
+	public static final String BLEU_CIEL = "\u001B[94m";
+	public static final String RESET = "\u001B[0m";
+
 
 	/**
 	 * Permet de construire une carte
@@ -83,9 +88,34 @@ public class Carte {
 	 * 
 	 * @return Le nom de la couleur de la carte sous forme de String
 	 */ 
-	public String toString() {
+	public String toStringPhrase() {
 		// On construit la présentation d'une carte
 		return (this.getValeur() + " de " + this.getCouleur()); 
+	}
 
+	/** 
+	 * Permet de retourner le modèle de la carte qui apparaitra
+	 * dans le terminal
+	 * 
+	 * @return les caractéristique de la carte
+	 */
+	public String toString() {
+		// Si c'est coeur alors
+		if (this.couleur == COEUR) {
+			return ("[ " + ROUGE + this.valeur + " \u2665" + RESET + " ]");
+		}
+
+		// Si c'est carreau alors
+		if (this.couleur == CARREAU) {
+			return ("[ " + ROUGE + this.valeur + " \u2666" + RESET + " ]");
+		}
+
+		// Si c'est trefle alors
+		if (this.couleur == TREFLE) {
+			return ("[ " + BLEU_CIEL + this.valeur + " \u2663" + RESET + " ]");
+		}
+
+		// Si c'est pique alors
+		return ("[ " + BLEU_CIEL + this.valeur + " \u2660" + RESET + " ]");
 	}
 }
