@@ -7,5 +7,4 @@ public class Jeu {
 	private Paquet paquet_croupier;
 
 	// Création des différents paquets
-	
 }
