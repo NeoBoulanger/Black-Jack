@@ -1,55 +1,52 @@
-1;1  # As de Coeur
-1;2  # 2 de Coeur
-1;3  # 3 de Coeur
-1;4  # 4 de Coeur
-1;5  # 5 de Coeur
-1;6  # 6 de Coeur
-1;7  # 7 de Coeur
-1;8  # 8 de Coeur
-1;9  # 9 de Coeur
-1;10 # 10 de Coeur
-1;11 # Valet de Coeur
-1;12 # Dame de Coeur
-1;13 # Roi de Coeur
-
-2;1  # As de Pique
-2;2  # 2 de Pique
-2;3  # 3 de Pique
-2;4  # 4 de Pique
-2;5  # 5 de Pique
-2;6  # 6 de Pique
-2;7  # 7 de Pique
-2;8  # 8 de Pique
-2;9  # 9 de Pique
-2;10 # 10 de Pique
-2;11 # Valet de Pique
-2;12 # Dame de Pique
-2;13 # Roi de Pique
-
-3;1  # As de Trèfle
-3;2  # 2 de Trèfle
-3;3  # 3 de Trèfle
-3;4  # 4 de Trèfle
-3;5  # 5 de Trèfle
-3;6  # 6 de Trèfle
-3;7  # 7 de Trèfle
-3;8  # 8 de Trèfle
-3;9  # 9 de Trèfle
-3;10 # 10 de Trèfle
-3;11 # Valet de Trèfle
-3;12 # Dame de Trèfle
-3;13 # Roi de Trèfle
-
-4;1  # As de Carreau
-4;2  # 2 de Carreau
-4;3  # 3 de Carreau
-4;4  # 4 de Carreau
-4;5  # 5 de Carreau
-4;6  # 6 de Carreau
-4;7  # 7 de Carreau
-4;8  # 8 de Carreau
-4;9  # 9 de Carreau
-4;10 # 10 de Carreau
-4;11 # Valet de Carreau
-4;12 # Dame de Carreau
-4;13 # Roi de Carreau
+1;1
+1;2
+1;3
+1;4
+1;5
+1;6
+1;7
+1;8
+1;9
+1;10
+1;11
+1;12
+1;13
+2;1
+2;2
+2;3
+2;4
+2;5
+2;6
+2;7
+2;8
+2;9
+2;10
+2;11
+2;12
+2;13
+3;1
+3;2
+3;3
+3;4
+3;5
+3;6
+3;7
+3;8
+3;9
+3;10
+3;11
+3;12
+3;13
+4;1
+4;2
+4;3
+4;4
+4;5
+4;6
+4;7
+4;8
+4;9
+4;10
+4;11
+4;12
+4;13

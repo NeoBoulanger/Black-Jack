@@ -4,7 +4,7 @@ import java.io.*;
 public class Paquet {
 	private ArrayList<Carte> paquet;
 	private BufferedReader src;
-	private static int nbCarte=0;
+	private int nbCarte=0;
 
 	/** 
 	 * Constructeur vide permettant de construire un paquet vide.
@@ -21,16 +21,18 @@ public class Paquet {
 	 */
 	public Paquet(String fichier) throws Exception{
 		this.src=new BufferedReader(new FileReader("../data/cartes.txt"));
+		this.paquet = new ArrayList<Carte>();
 		int i=0;
 		String[] carteSplit;
-		while (i<=53) {
-			String split=this.src.readLine();
-			carteSplit=split.split(";");
+		String ligne;
+		while ((ligne=this.src.readLine())!=null) {
+			carteSplit=ligne.split(";");
 
 			Carte carte=new Carte(Integer.parseInt(carteSplit[0]), Integer.parseInt(carteSplit[1]));
 
 			this.paquet.add(carte);
 		}
+		this.nbCarte=52;
 	}
 	
 	/**
@@ -40,6 +42,7 @@ public class Paquet {
 	 */
 	public void retirerCarte(int index) {
 		this.paquet.remove(index);
+		this.nbCarte-=1;
 	}
 
 	/**
@@ -63,6 +66,7 @@ public class Paquet {
 	 */
 	public void ajouterCarte(Carte c) {
 		this.paquet.add(c);
+		this.nbCarte+=1;
 	}
 
 	/**
@@ -74,9 +78,23 @@ public class Paquet {
 		//	Création de la String de return
 		String res="";
 		// Parcours de la liste et concaténation des cartes
-		for (int i=0; i<=this.paquet.size();i++) {
+		for (int i=0; i<=this.paquet.size()-1;i++) {
 			res+= this.paquet.get(i).toString() + " ";
 		}
 		return res;
+	}
+
+	public void retournerPaquet(){
+		for(int i=0; i<=this.paquet.size() - 1 ;i++){
+			this.paquet.get(i).retourner();
+		}
+	}
+
+	public int getNbCarte() {
+		return this.nbCarte;
+	}
+
+	public Carte getCarte(int index) {
+		return this.paquet.get(index);
 	}
 }
