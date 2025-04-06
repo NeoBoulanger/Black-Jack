@@ -25,7 +25,7 @@ public class Jeu {
 		this.paquet_joueur = new Paquet();
 		this.paquet_croupier = new Paquet();
 	
-	    try (BufferedReader reader = new BufferedReader(new FileReader("../../solde.txt"))) {
+	    try (BufferedReader reader = new BufferedReader(new FileReader("../solde.txt"))) {
     	    String ligne = reader.readLine();
         	if (ligne != null && !ligne.isBlank()) {
            		this.solde = Integer.parseInt(ligne.trim());
@@ -199,7 +199,7 @@ public class Jeu {
 	}
 
 	public void majSolde()throws Exception{
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter("../../solde.txt"))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("../solde.txt"))) {
         	writer.write(String.valueOf(this.solde));
     	}
 	}
