@@ -97,6 +97,10 @@ public class Carte {
 		return "";
 	}
 
+	public boolean getRetourne(){
+		return this.retournee;
+	}
+
 	/**
 	 * Permet de retourner les details de la carte sous forme de texte
 	 * (As de Coeur, 10 de Pique, ...)

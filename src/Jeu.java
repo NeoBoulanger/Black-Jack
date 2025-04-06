@@ -6,12 +6,14 @@ public class Jeu {
 
 	private Paquet paquet_joueur;
 	private int solde;
-	private BufferedReader src;
+	
 	private int mise=0;
 
 	private Paquet paquet_croupier;
 
 	public static final String VERT="\u001B[32m";
+	public static final String JAUNE = "\u001B[93m";
+	public static final String GRIS = "\u001B[90m";
 	public static final String RESET="\u001B[0m";
 
 	/**
@@ -23,8 +25,14 @@ public class Jeu {
 		this.paquet_joueur = new Paquet();
 		this.paquet_croupier = new Paquet();
 	
-		this.src=new BufferedReader(new FileReader("../../solde.txt"));
-		this.solde=Integer.parseInt(this.src.readLine());
+	    try (BufferedReader reader = new BufferedReader(new FileReader("../../solde.txt"))) {
+    	    String ligne = reader.readLine();
+        	if (ligne != null && !ligne.isBlank()) {
+           		this.solde = Integer.parseInt(ligne.trim());
+	        } else {
+    	        this.solde = 100; // ou autre valeur par défaut
+        	}
+    	}
 	}
 
 	/**
@@ -102,6 +110,10 @@ public class Jeu {
 		this.mise=0;
 	}
 
+	public int getSolde(){
+		return this.solde;
+	}
+
 	public void tirer() throws Exception{
 		boolean bustJoueur = this.piocherJoueur();
 		boolean bustCroupier=false;
@@ -112,13 +124,14 @@ public class Jeu {
 		if(bustJoueur){
 			this.perdre(); 
 			this.paquet_croupier.retournerPaquet();
+			System.out.println(this.toString()+'\n'+'\n');
+			Thread.sleep(2000);
 			System.out.println(this.toString()+'\n');
-			System.out.println("Vous avez bust ...");
+			System.out.println("Vous avez fait un bust ...");
 		}else{
 			while(this.retournerCroupierSomme()<16) {
 				bustCroupier=this.piocherCroupier();
 				this.paquet_croupier.retournerPaquet();
-				
 				
 				Thread.sleep(2000);
 				System.out.println(this.toString()+'\n'+'\n');
@@ -127,22 +140,68 @@ public class Jeu {
 			if(bustCroupier || this.retournerJoueurSomme() > this.retournerCroupierSomme()) {
 				this.gagner(); 
 				System.out.println(this.toString()+'\n'+'\n');
-				Thread.sleep(2000);
+				this.paquet_croupier.retournerPaquet();
+				Thread.sleep(1000);
+				System.out.println(this.toString()+'\n'+'\n');
+				Thread.sleep(1000);
 				System.out.println(this.toString()+'\n');
 				System.out.println("Félicitations, vous avez battus le Croupier ! ");
-			}else {
+			}else{
 				this.perdre(); 
 				System.out.println(this.toString()+'\n'+'\n');
-				Thread.sleep(2000);
+				this.paquet_croupier.retournerPaquet();
+				Thread.sleep(1000);
+				System.out.println(this.toString()+'\n'+'\n');
+				Thread.sleep(1000);
 				System.out.println(this.toString()+'\n');
 				System.out.println("Dommage, le Croupier vous a battu ...");
 			}
 		}
+	}
+
+	public void doubler() throws Exception {
+		this.miser(this.mise);
+		System.out.println(this.toString()+'\n'+'\n');
+		Thread.sleep(2000);
+		this.tirer();
+	}
+
+	public void rester() throws Exception {
+		boolean bustCroupier=false;
+		while(this.retournerCroupierSomme()<16) {
+			bustCroupier=this.piocherCroupier();
+			this.paquet_croupier.retournerPaquet();
+
+			Thread.sleep(2000);
+			System.out.println(this.toString()+'\n'+'\n');
+		}
+		if(bustCroupier || this.paquet_joueur.getSomme() > this.paquet_croupier.getSomme()){
+			this.gagner();
+			System.out.println(this.toString()+'\n'+'\n');
+			Thread.sleep(2000);
+			System.out.println(this.toString()+'\n');
+			System.out.println("Félicitations, vous avez battus le Croupier ! ");
+		}else if(this.paquet_joueur.getSomme() < this.paquet_croupier.getSomme()) {
+			this.perdre();
+			System.out.println(this.toString()+'\n'+'\n');
+			Thread.sleep(2000);
+			System.out.println(this.toString()+'\n');
+			System.out.println("Dommage, le Croupier vous a battu ...");
+		}
+	}
+
+	public void decliner() throws Exception{
+		this.solde+=this.mise/2;
+		System.out.println(this.toString()+'\n'+'\n');
+		System.out.println(this.toString()+'\n');
+		System.out.println("Vous avez abandonné, vous récupérez la moitié de votre mise.");
 
 	}
 
-	public void rester(){
-
+	public void majSolde()throws Exception{
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("../../solde.txt"))) {
+        	writer.write(String.valueOf(this.solde));
+    	}
 	}
 
 	public String toString() {
@@ -153,11 +212,11 @@ public class Jeu {
 		res+=VERT + "-----------------------------------------------------" + '\n' + RESET;
 
 		res+="Croupier : " + '\n';
-		res+="\t"+this.paquet_croupier.toString()+'\n';
+		res+="\t"+this.paquet_croupier.toString()+ '\n' + '\n' + "\t" + JAUNE + "Total : " + this.paquet_croupier.getSomme() + RESET +'\n';
 		res+=VERT + '\n' + "-----------------------------------------------------" + '\n' + RESET;
 
 		res+="Joueur : " + '\n';
-		res+="\t"+this.paquet_joueur.toString()+'\n' + "\t"+"\t"+"\t"+ "Solde : " + this.solde + "\t" + "Mise : " + this.mise + '\n'+'\n';
+		res+="\t"+this.paquet_joueur.toString()+ '\n' + '\n' + "\t" + JAUNE + "Total : " + this.paquet_joueur.getSomme() + RESET + '\n' + '\n' + "\t"+"\t"+"\t"+ GRIS + "Solde : " + this.solde + "\t" + "Mise : " + this.mise +'\n' + RESET;
 
 		res+=VERT + "*****************************************************" + RESET;
 

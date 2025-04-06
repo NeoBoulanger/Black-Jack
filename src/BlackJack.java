@@ -5,8 +5,12 @@ public class BlackJack {
 		Scanner sc=new Scanner(System.in);
 		boolean continuer=true;
 
+
+		
 		while(continuer){
 				Jeu jeu = new Jeu();
+
+				System.out.println("Solde actuel : " + jeu.getSolde());
 				System.out.println("Miser une somme : ");
 				jeu.miser(sc.nextInt());
 				System.out.println("Très bien, la partie commence");
@@ -33,7 +37,7 @@ public class BlackJack {
 				Thread.sleep(3000);
 
 				System.out.println(jeu.toString());
-				System.out.println("    [1]-Tirer  [2]-Rester  [3]-Doubler  [4]-Split"+'\n');
+				System.out.println("    [1]-Tirer  [2]-Rester  [3]-Doubler  [4]-Décliner"+'\n');
 
 				System.out.print("Choississez une action : ");
 				int action=sc.nextInt();
@@ -44,19 +48,27 @@ public class BlackJack {
 				}
 
 				if(action == 2 ){
-				
+					jeu.rester();
 				}
 
 				if(action == 3 ){
-				
+					jeu.doubler();
 				}
 
 				if(action == 4 ){
-				
+					jeu.decliner();
 				}
 
-				System.out.print("\t"+"Continuer ? ( 1 / 0 )");
+				jeu.majSolde();
+				System.out.println('\n' + "Continuer ?");
+				System.out.println(Carte.BLEU_CIEL + "Oui : 1" + Carte.ROUGE + "\t" + "\t" + "Non : 0" + Carte.RESET + '\n');
+				
 				int reponse=sc.nextInt();
+
+				if(reponse==1){}
+				else{
+					continuer=false;
+				}
 		}
 
 

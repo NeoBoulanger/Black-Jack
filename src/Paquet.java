@@ -106,7 +106,9 @@ public class Paquet {
 	public int getSomme(){
 		int somme=0;
 		for (int i=0; i<=this.paquet.size()-1; i++) {
-			somme+=this.paquet.get(i).getPuissance();
+			if(this.paquet.get(i).getRetourne()){
+				somme+=this.paquet.get(i).getPuissance();
+			}
 		}
 		return somme;
 	}
