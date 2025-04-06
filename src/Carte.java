@@ -48,7 +48,7 @@ public class Carte {
 	 */
 	public void retourner() {
 		// Remplasser retournee par non retournee
-		this.retournee=!this.retournee;
+		this.retournee=true;
 	}
 
 	/**
@@ -88,7 +88,6 @@ public class Carte {
 	 */
 	public String getCouleur() {
 		// On retourne le nom de la couleur associée
-		if(this.retournee){return "?";}
 		switch (this.couleur) {
 			case Carte.COEUR : return "Coeur";
 			case Carte.PIQUE : return "Pique";
@@ -116,7 +115,7 @@ public class Carte {
 	 * @return les caractéristique de la carte
 	 */
 	public String toString() {
-		if(!this.retournee) {return ("[ ?? ]");}
+		if(!this.retournee) {return ("\u001B[37m"+"[??]"+RESET);}
 
 		String value = String.valueOf(this.valeur);
 		switch (this.valeur) {
@@ -127,20 +126,20 @@ public class Carte {
 
 		// Si c'est coeur alors
 		if (this.couleur == COEUR) {
-			return (ROUGE + "[" + value + " \u2665" + "]" + RESET);
+			return (ROUGE + "[" + value + "\u2665" + "]" + RESET);
 		}
 
 		// Si c'est carreau alors
 		if (this.couleur == CARREAU) {
-			return (ROUGE + "[" + value + " \u2666" + "]" + RESET);
+			return (ROUGE + "[" + value + "\u2666" + "]" + RESET);
 		}
 
 		// Si c'est trefle alors
 		if (this.couleur == TREFLE) {
-			return (BLEU_CIEL + "[" + value + " \u2663" + "]" + RESET);
+			return (BLEU_CIEL + "[" + value + "\u2663" + "]" + RESET);
 		}
 
 		// Si c'est pique alors
-		return (BLEU_CIEL + "[" + value + " \u2660" + "]" + RESET);
+		return (BLEU_CIEL + "[" + value + "\u2660" + "]" + RESET);
 	}
 }

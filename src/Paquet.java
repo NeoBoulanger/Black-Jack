@@ -77,6 +77,7 @@ public class Paquet {
 	public String toString() {
 		//	Création de la String de return
 		String res="";
+
 		// Parcours de la liste et concaténation des cartes
 		for (int i=0; i<=this.paquet.size()-1;i++) {
 			res+= this.paquet.get(i).toString() + " ";
@@ -90,11 +91,23 @@ public class Paquet {
 		}
 	}
 
+	public void retournerCarte(int index) {
+		this.paquet.get(index-1).retourner();
+	}
+
 	public int getNbCarte() {
 		return this.nbCarte;
 	}
 
 	public Carte getCarte(int index) {
 		return this.paquet.get(index);
+	}
+
+	public int getSomme(){
+		int somme=0;
+		for (int i=0; i<=this.paquet.size()-1; i++) {
+			somme+=this.paquet.get(i).getPuissance();
+		}
+		return somme;
 	}
 }
